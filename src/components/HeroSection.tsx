@@ -51,7 +51,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section dir={isRtl ? 'rtl' : 'ltr'} className="relative w-full min-h-[95vh] overflow-hidden bg-neutral-950 flex items-center justify-center pt-32 pb-24">
+    <section dir={isRtl ? 'rtl' : 'ltr'} className="relative w-full overflow-hidden bg-neutral-950 flex items-center justify-center pt-28 pb-16">
       {/* Auto-scrolling Background Image Marquees */}
       <div className="absolute inset-0 z-0 flex flex-col justify-center space-y-4 opacity-30 select-none pointer-events-none scale-105">
         {/* Row 1 - Left to Right */}
