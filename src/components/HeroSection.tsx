@@ -183,24 +183,6 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Down Scroll Indicator */}
-      <motion.div
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center gap-1 cursor-pointer"
-        onClick={() => window.scrollTo({ top: window.innerHeight - 80, behavior: 'smooth' })}
-      >
-        <span className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest hidden sm:inline">
-          {getTranslation('heroScrollIndicator', locale)}
-        </span>
-        <div className="w-5 h-8 border-2 border-neutral-700 rounded-full flex justify-center p-1">
-          <motion.div
-            animate={{ y: [0, 4, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-1 h-1.5 bg-primary-500 rounded-full"
-          />
-        </div>
-      </motion.div>
     </section>
   );
 }

@@ -62,10 +62,10 @@ export default function TopSellers({ sellers }: TopSellersProps) {
         >
           {sellers.map((seller, index) => (
             <motion.div key={seller.id} variants={itemVariants}>
-              <Link href={`/sellers/${seller.id}`}>
+              <Link href={`/sellers/${seller.id}`} className="block h-full">
                 <motion.div
                   whileHover={{ y: -8, scale: 1.02 }}
-                  className="card overflow-hidden cursor-pointer group relative"
+                  className="card overflow-hidden cursor-pointer group relative flex flex-col h-full"
                 >
                   {/* Rank Badge */}
                   {index < 3 && (
@@ -118,7 +118,7 @@ export default function TopSellers({ sellers }: TopSellersProps) {
                   </div>
 
                   {/* Content */}
-                  <div className="text-center space-y-3">
+                  <div className="text-center space-y-3 flex flex-col flex-1">
                     <h3 className="text-xl font-bold text-neutral-900 group-hover:text-primary-600 transition-colors">
                       {seller.storeName}
                     </h3>
@@ -143,24 +143,18 @@ export default function TopSellers({ sellers }: TopSellersProps) {
                     </div>
 
                     {/* Stats */}
-                    <div className="grid grid-cols-2 gap-4 pt-4 border-t border-neutral-200">
-                      <div>
+                    <div className="pt-4 border-t border-neutral-200">
+                      <div className="flex flex-col items-center justify-center">
                         <div className="flex items-center justify-center gap-1 text-primary-600 mb-1">
                           <FiShoppingBag className="w-4 h-4" />
                           <p className="text-2xl font-bold">{seller.totalSales}</p>
                         </div>
-                        <p className="text-xs text-neutral-600">Total Sales</p>
-                      </div>
-                      <div>
-                        <p className="text-2xl font-bold text-primary-600 mb-1">
-                          Rs {(seller.totalRevenue / 1000).toFixed(0)}K
-                        </p>
-                        <p className="text-xs text-neutral-600">Revenue</p>
+                        <p className="text-xs text-neutral-600 font-semibold uppercase tracking-wide">Total Sales</p>
                       </div>
                     </div>
 
                     {/* Description */}
-                    <p className="text-sm text-neutral-600 line-clamp-2 px-2">
+                    <p className="text-sm text-neutral-600 line-clamp-2 px-2 flex-1">
                       {seller.storeDescription}
                     </p>
 
