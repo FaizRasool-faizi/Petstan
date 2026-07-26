@@ -51,9 +51,9 @@ export default function HeroSection() {
   };
 
   return (
-    <section dir={isRtl ? 'rtl' : 'ltr'} className="relative w-full h-[95vh] min-h-[600px] overflow-hidden bg-neutral-950 flex items-center pt-20">
+    <section dir={isRtl ? 'rtl' : 'ltr'} className="relative w-full min-h-[95vh] overflow-hidden bg-neutral-950 flex items-center justify-center pt-32 pb-24">
       {/* Auto-scrolling Background Image Marquees */}
-      <div className="absolute inset-0 z-0 flex flex-col justify-center space-y-4 opacity-15 select-none pointer-events-none scale-105">
+      <div className="absolute inset-0 z-0 flex flex-col justify-center space-y-4 opacity-30 select-none pointer-events-none scale-105">
         {/* Row 1 - Left to Right */}
         <div className="w-[200%] flex overflow-hidden whitespace-nowrap">
           <motion.div
@@ -153,7 +153,7 @@ export default function HeroSection() {
           {/* Platform Performance Stats */}
           <motion.div
             variants={itemVariants}
-            className="grid grid-cols-3 gap-6 sm:gap-12 w-full max-w-2xl border-t border-neutral-800 pt-10"
+            className="grid grid-cols-3 gap-4 sm:gap-12 w-full max-w-2xl border-t border-neutral-800 pt-8"
           >
             <div className="text-center">
               <p className="text-2xl sm:text-4xl font-extrabold bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
@@ -187,7 +187,7 @@ export default function HeroSection() {
       <motion.div
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center gap-1 cursor-pointer"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center gap-1 cursor-pointer"
         onClick={() => window.scrollTo({ top: window.innerHeight - 80, behavior: 'smooth' })}
       >
         <span className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest hidden sm:inline">

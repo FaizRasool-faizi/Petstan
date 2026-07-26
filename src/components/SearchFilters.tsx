@@ -115,82 +115,91 @@ export default function SearchFilters({ onFilterChange }: SearchFiltersProps) {
             exit={{ opacity: 0, height: 0 }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-6 border-t border-neutral-200"
           >
-            {/* Price Range */}
+            {/* Price Range Slider */}
             <div>
-              <label className="block text-sm font-medium text-neutral-700 mb-2">
-                Price Range (PKR)
-              </label>
-              <div className="flex gap-2">
-                <input
-                  type="number"
-                  placeholder="Min"
-                  value={filters.minPrice || ''}
-                  onChange={(e) =>
-                    handleFilterChange('minPrice', e.target.value ? Number(e.target.value) : undefined)
-                  }
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                />
-                <input
-                  type="number"
-                  placeholder="Max"
-                  value={filters.maxPrice || ''}
-                  onChange={(e) =>
-                    handleFilterChange('maxPrice', e.target.value ? Number(e.target.value) : undefined)
-                  }
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                />
+              <div className="flex justify-between items-center mb-2">
+                <label className="block text-sm font-bold text-neutral-700">Max Price</label>
+                <span className="text-primary-600 font-extrabold text-sm">
+                  Rs {filters.maxPrice ? filters.maxPrice.toLocaleString() : 'Any'}
+                </span>
+              </div>
+              <input
+                type="range"
+                min="1000"
+                max="200000"
+                step="1000"
+                value={filters.maxPrice || 200000}
+                onChange={(e) => handleFilterChange('maxPrice', Number(e.target.value))}
+                className="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer accent-primary-600 mb-2"
+              />
+              <div className="flex justify-between text-xs text-neutral-400 font-medium">
+                <span>Rs 1k</span>
+                <span>Rs 200k+</span>
               </div>
             </div>
 
-            {/* Gender */}
+            {/* Gender Pills */}
             <div>
-              <label className="block text-sm font-medium text-neutral-700 mb-2">Gender</label>
-              <select
-                value={filters.gender || ''}
-                onChange={(e) =>
-                  handleFilterChange('gender', e.target.value || undefined)
-                }
-                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-              >
-                <option value="">All</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
+              <label className="block text-sm font-bold text-neutral-700 mb-2">Gender</label>
+              <div className="flex gap-2">
+                {[
+                  { id: undefined, label: 'All' },
+                  { id: 'male', label: 'Male ♂' },
+                  { id: 'female', label: 'Female ♀' }
+                ].map((g) => (
+                  <button
+                    key={g.id || 'all'}
+                    onClick={() => handleFilterChange('gender', g.id)}
+                    className={`flex-1 py-2 text-sm font-bold rounded-lg border transition-all ${
+                      filters.gender === g.id
+                        ? 'bg-primary-50 border-primary-500 text-primary-700'
+                        : 'bg-white border-neutral-200 text-neutral-600 hover:border-primary-300'
+                    }`}
+                  >
+                    {g.label}
+                  </button>
+                ))}
+              </div>
             </div>
 
-            {/* Vaccinated */}
+            {/* Vaccinated Pills */}
             <div>
-              <label className="block text-sm font-medium text-neutral-700 mb-2">
-                Vaccinated
+              <label className="block text-sm font-bold text-neutral-700 mb-2">
+                Vaccinated Status
               </label>
-              <select
-                value={filters.vaccinated === undefined ? '' : filters.vaccinated.toString()}
-                onChange={(e) =>
-                  handleFilterChange(
-                    'vaccinated',
-                    e.target.value === '' ? undefined : e.target.value === 'true'
-                  )
-                }
-                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-              >
-                <option value="">All</option>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-              </select>
+              <div className="flex gap-2">
+                {[
+                  { id: undefined, label: 'All' },
+                  { id: true, label: 'Yes 💉' },
+                  { id: false, label: 'No' }
+                ].map((v) => (
+                  <button
+                    key={v.id === undefined ? 'all' : v.id.toString()}
+                    onClick={() => handleFilterChange('vaccinated', v.id)}
+                    className={`flex-1 py-2 text-sm font-bold rounded-lg border transition-all ${
+                      filters.vaccinated === v.id
+                        ? 'bg-green-50 border-green-500 text-green-700'
+                        : 'bg-white border-neutral-200 text-neutral-600 hover:border-green-300'
+                    }`}
+                  >
+                    {v.label}
+                  </button>
+                ))}
+              </div>
             </div>
 
-            {/* Sort By */}
+            {/* Sort By Dropdown */}
             <div>
-              <label className="block text-sm font-medium text-neutral-700 mb-2">Sort By</label>
+              <label className="block text-sm font-bold text-neutral-700 mb-2">Sort By</label>
               <select
                 value={filters.sortBy || 'newest'}
                 onChange={(e) => handleFilterChange('sortBy', e.target.value)}
-                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="w-full px-3 py-2 border border-neutral-200 bg-neutral-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 font-medium text-neutral-700"
               >
-                <option value="newest">Newest First</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="popular">Most Popular</option>
+                <option value="newest">🔥 Newest First</option>
+                <option value="price-low">💰 Price: Low to High</option>
+                <option value="price-high">💎 Price: High to Low</option>
+                <option value="popular">⭐ Most Popular</option>
               </select>
             </div>
           </motion.div>

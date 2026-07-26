@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FiArrowLeft, FiHeart, FiShoppingCart, FiStar, FiPhone, FiMail, FiCheck, FiInfo, FiShield, FiCheckCircle, FiFileText, FiMessageSquare } from 'react-icons/fi';
 import { useCartStore, useUIStore } from '@/lib/store';
 import { getTranslation } from '@/utils/translations';
@@ -11,6 +11,7 @@ import toast from 'react-hot-toast';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ReviewSection from '@/components/ReviewSection';
+import CrossSell from '@/components/CrossSell';
 
 import { Pet } from '@/types';
 
@@ -24,6 +25,15 @@ export default function PetDetailClient({ pet }: PetDetailClientProps) {
   const { addToCart } = useCartStore();
   const { locale } = useUIStore();
   const isRtl = locale === 'ur';
+  const [showStickyBar, setShowStickyBar] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowStickyBar(window.scrollY > 400);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   if (!pet) {
     return (
@@ -144,6 +154,19 @@ export default function PetDetailClient({ pet }: PetDetailClientProps) {
                   Rs {pet.price.toLocaleString()}
                 </span>
                 {pet.category === 'feed' && <span className="text-neutral-500 font-medium">/{locale === 'en' ? 'pack' : 'پیک'}</span>}
+              </div>
+
+              {/* Trust Badges */}
+              <div className="flex flex-wrap gap-2 mt-5 pt-5 border-t border-neutral-100">
+                 <span className="flex items-center gap-1.5 text-xs font-bold text-green-700 bg-green-50 px-3 py-1.5 rounded-md border border-green-100">
+                   <FiShield className="w-4 h-4" /> 100% Health Guarantee
+                 </span>
+                 <span className="flex items-center gap-1.5 text-xs font-bold text-blue-700 bg-blue-50 px-3 py-1.5 rounded-md border border-blue-100">
+                   <FiCheckCircle className="w-4 h-4" /> Verified Breeder
+                 </span>
+                 <span className="flex items-center gap-1.5 text-xs font-bold text-purple-700 bg-purple-50 px-3 py-1.5 rounded-md border border-purple-100">
+                   <FiHeart className="w-4 h-4" /> Lifetime Support
+                 </span>
               </div>
             </div>
 
@@ -300,12 +323,49 @@ export default function PetDetailClient({ pet }: PetDetailClientProps) {
             </div>
           </motion.div>
         </div>
+        
+        {/* Cross Sell Section */}
+        {pet.category !== 'feed' && (
+          <CrossSell petCategory={pet.category} />
+        )}
 
         {/* Reviews Section */}
         <div className="mt-12 max-w-4xl">
           <ReviewSection sellerId={pet.sellerId} petId={pet.id} title={locale === 'en' ? 'Reviews & Ratings' : 'رائے اور ریٹنگ'} />
         </div>
       </div>
+
+      {/* Sticky Add to Cart Bar (Mobile) */}
+      <AnimatePresence>
+        {showStickyBar && (
+          <motion.div 
+            initial={{ y: 100 }}
+            animate={{ y: 0 }}
+            exit={{ y: 100 }}
+            className="fixed bottom-0 left-0 right-0 bg-white border-t border-neutral-200 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] p-4 z-50 md:hidden"
+          >
+            <div className="container-custom flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                 <div className="relative w-12 h-12 rounded-lg overflow-hidden border border-neutral-200">
+                   <Image src={pet.images[0] || 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=400&h=400&fit=crop'} alt={pet.name} fill className="object-cover" />
+                 </div>
+                 <div>
+                   <p className="font-extrabold text-sm text-neutral-900 truncate w-32">{pet.name}</p>
+                   <p className="text-primary-600 font-bold text-sm">Rs {pet.price.toLocaleString()}</p>
+                 </div>
+              </div>
+              <button 
+                onClick={handleAddToCart}
+                disabled={pet.status !== 'active'}
+                className="btn-primary flex-1 py-3 px-2 flex justify-center items-center gap-2 rounded-xl shadow-lg shadow-primary-900/20"
+              >
+                <FiShoppingCart className="w-5 h-5" /> 
+                <span className="font-bold">{locale === 'en' ? 'Add' : 'شامل کریں'}</span>
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Footer />
     </div>

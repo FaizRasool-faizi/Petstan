@@ -7,9 +7,12 @@ import SearchFilters from '@/components/SearchFilters';
 import PetCard from '@/components/PetCard';
 import TopSellers from '@/components/TopSellers';
 import Footer from '@/components/Footer';
+import PetStories from '@/components/PetStories';
 import { Pet, Seller, SearchFilters as SearchFiltersType } from '@/types';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Toaster } from 'react-hot-toast';
+import { FiClock, FiEye, FiTrendingUp } from 'react-icons/fi';
+import Image from 'next/image';
 
 // Mock Data
 const mockPets: Pet[] = [
@@ -253,11 +256,71 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-neutral-50">
+    <main className="min-h-screen bg-neutral-50 overflow-hidden">
       <Toaster position="top-right" />
       <Navbar />
       <HeroSection />
+      
+      {/* Pet Stories - Engaging emotional hook */}
+      <PetStories />
+
+      {/* Visual Category Quick-Links */}
+      <section className="py-10 bg-white border-b border-neutral-100 shadow-sm z-10 relative">
+        <div className="container-custom">
+          <div className="flex justify-start md:justify-center gap-6 md:gap-12 overflow-x-auto pb-4 pt-2 scrollbar-hide snap-x">
+            {[
+              { id: 'dogs', icon: '🐕', name: 'Dogs', color: 'bg-orange-100 text-orange-600' },
+              { id: 'cats', icon: '🐈', name: 'Cats', color: 'bg-purple-100 text-purple-600' },
+              { id: 'birds', icon: '🦜', name: 'Birds', color: 'bg-sky-100 text-sky-600' },
+              { id: 'fish', icon: '🐠', name: 'Fish', color: 'bg-blue-100 text-blue-600' },
+              { id: 'feed', icon: '🦴', name: 'Accessories', color: 'bg-rose-100 text-rose-600' },
+            ].map(cat => (
+              <motion.button
+                key={cat.id}
+                whileHover={{ scale: 1.1, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleFilterChange({ category: cat.id as any })}
+                className="flex flex-col items-center gap-3 snap-center cursor-pointer group"
+              >
+                <div className={`w-20 h-20 rounded-full ${cat.color} flex items-center justify-center text-4xl shadow-md group-hover:shadow-lg transition-all border-4 border-white`}>
+                  {cat.icon}
+                </div>
+                <span className="font-extrabold text-sm text-neutral-700">{cat.name}</span>
+              </motion.button>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <SearchFilters onFilterChange={handleFilterChange} />
+
+      {/* Flash Deals / Urgency hook */}
+      <section className="py-12 bg-gradient-to-r from-rose-500 to-primary-600 text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/paw-pattern.png')]"></div>
+        <div className="container-custom flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
+           <div className="flex-1 space-y-3 text-center md:text-left">
+             <h2 className="text-3xl md:text-5xl font-black flex items-center justify-center md:justify-start gap-3 tracking-tight">
+                ⚡ Flash Deals 
+                <span className="text-xs font-black bg-white text-rose-600 px-3 py-1 rounded-full uppercase tracking-widest shadow-md">Ends soon</span>
+             </h2>
+             <p className="text-white/90 font-medium text-lg max-w-xl">Adopt your new best friend today and get up to 50% off adoption fees and free premium accessories!</p>
+           </div>
+           <div className="flex gap-4">
+              <div className="bg-white/20 backdrop-blur-md rounded-2xl p-4 text-center min-w-[80px] border border-white/30 shadow-xl">
+                 <span className="block text-4xl font-black">05</span>
+                 <span className="text-xs font-bold uppercase tracking-widest opacity-80 mt-1 block">Hours</span>
+              </div>
+              <div className="bg-white/20 backdrop-blur-md rounded-2xl p-4 text-center min-w-[80px] border border-white/30 shadow-xl">
+                 <span className="block text-4xl font-black">45</span>
+                 <span className="text-xs font-bold uppercase tracking-widest opacity-80 mt-1 block">Mins</span>
+              </div>
+              <div className="bg-white/20 backdrop-blur-md rounded-2xl p-4 text-center min-w-[80px] border border-white/30 shadow-xl">
+                 <span className="block text-4xl font-black">12</span>
+                 <span className="text-xs font-bold uppercase tracking-widest opacity-80 mt-1 block">Secs</span>
+              </div>
+           </div>
+        </div>
+      </section>
 
       {/* Top Sellers Section */}
       <TopSellers sellers={mockSellers} />
@@ -289,12 +352,34 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-center py-16"
+              className="text-center py-20 bg-neutral-50 rounded-3xl border border-neutral-200 border-dashed"
             >
-              <p className="text-2xl text-neutral-600">No pets found matching your filters</p>
-              <p className="text-neutral-500 mt-2">Try adjusting your search criteria</p>
+              <div className="text-6xl mb-4">🔍</div>
+              <p className="text-2xl font-bold text-neutral-800">No pets found matching your filters</p>
+              <p className="text-neutral-500 font-medium mt-2">Try adjusting your search criteria or explore other categories</p>
             </motion.div>
           )}
+        </div>
+      </section>
+
+      {/* Recently Viewed - Retargeting hook */}
+      <section className="py-12 bg-neutral-100 border-t border-neutral-200">
+        <div className="container-custom">
+          <div className="flex items-center gap-2 mb-8">
+            <FiEye className="w-6 h-6 text-neutral-500" />
+            <h2 className="text-2xl font-extrabold text-neutral-900">Recently Viewed</h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+             {mockPets.slice(0, 5).reverse().map((pet, idx) => (
+                <div key={`recent-${pet.id}`} className="bg-white p-3 rounded-2xl shadow-sm border border-neutral-200 hover:shadow-md transition-shadow cursor-pointer group">
+                  <div className="relative w-full h-32 rounded-xl overflow-hidden mb-3">
+                    <Image src={pet.images[0]} alt={pet.name} fill className="object-cover group-hover:scale-110 transition-transform" />
+                  </div>
+                  <h4 className="font-bold text-sm text-neutral-900 truncate">{pet.name}</h4>
+                  <p className="text-primary-600 font-extrabold text-sm mt-1">Rs {pet.price.toLocaleString()}</p>
+                </div>
+             ))}
+          </div>
         </div>
       </section>
 
