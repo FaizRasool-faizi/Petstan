@@ -51,7 +51,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section dir={isRtl ? 'rtl' : 'ltr'} className="relative w-full overflow-hidden bg-neutral-950 flex items-center justify-center pt-28 pb-16">
+    <section dir={isRtl ? 'rtl' : 'ltr'} className="relative w-full overflow-hidden bg-neutral-950 flex items-center justify-center pt-24 pb-12">
       {/* Auto-scrolling Background Image Marquees */}
       <div className="absolute inset-0 z-0 flex flex-col justify-center space-y-4 opacity-30 select-none pointer-events-none scale-105">
         {/* Row 1 - Left to Right */}
@@ -98,7 +98,7 @@ export default function HeroSection() {
           className="max-w-4xl mx-auto flex flex-col items-center"
         >
           {/* Welcome Tag */}
-          <motion.div variants={itemVariants} className="mb-6">
+          <motion.div variants={itemVariants} className="mb-4">
             <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary-900/40 border border-primary-500/30 text-primary-400 rounded-full text-sm font-bold tracking-wide uppercase">
               🐾 {getTranslation('heroWelcome', locale)}
             </span>
@@ -107,7 +107,7 @@ export default function HeroSection() {
           {/* Heading */}
           <motion.h1
             variants={itemVariants}
-            className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white mb-6 leading-[1.15]"
+            className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-4 leading-[1.15]"
           >
             {getTranslation('heroTitle', locale)}{' '}
             <span className="bg-gradient-to-r from-primary-400 via-primary-500 to-secondary-400 bg-clip-text text-transparent drop-shadow-sm">
@@ -118,7 +118,7 @@ export default function HeroSection() {
           {/* Subtitle */}
           <motion.p
             variants={itemVariants}
-            className="text-lg md:text-xl text-neutral-300 mb-10 max-w-2xl font-medium leading-relaxed"
+            className="text-base md:text-lg text-neutral-300 mb-6 max-w-2xl font-medium leading-relaxed"
           >
             {getTranslation('heroSubtitle', locale)}
           </motion.p>
@@ -126,7 +126,7 @@ export default function HeroSection() {
           {/* CTA Action Buttons */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto mb-16"
+            className="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto mb-10"
           >
             <Link href="/pets">
               <motion.button
@@ -153,10 +153,10 @@ export default function HeroSection() {
           {/* Platform Performance Stats */}
           <motion.div
             variants={itemVariants}
-            className="grid grid-cols-3 gap-4 sm:gap-12 w-full max-w-2xl border-t border-neutral-800 pt-8"
+            className="grid grid-cols-3 gap-4 sm:gap-12 w-full max-w-2xl border-t border-neutral-800 pt-6"
           >
             <div className="text-center">
-              <p className="text-2xl sm:text-4xl font-extrabold bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
+              <p className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
                 {sellers.filter(s => s.id !== 's_admin').length}+
               </p>
               <p className="text-xs sm:text-sm text-neutral-400 mt-2 font-bold uppercase tracking-wide">
@@ -164,7 +164,7 @@ export default function HeroSection() {
               </p>
             </div>
             <div className="text-center">
-              <p className="text-2xl sm:text-4xl font-extrabold bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
+              <p className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
                 {pets.length}+
               </p>
               <p className="text-xs sm:text-sm text-neutral-400 mt-2 font-bold uppercase tracking-wide">
@@ -172,7 +172,7 @@ export default function HeroSection() {
               </p>
             </div>
             <div className="text-center">
-              <p className="text-2xl sm:text-4xl font-extrabold bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
+              <p className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
                 10K+
               </p>
               <p className="text-xs sm:text-sm text-neutral-400 mt-2 font-bold uppercase tracking-wide">
