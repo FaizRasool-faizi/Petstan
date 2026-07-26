@@ -1,0 +1,15 @@
+
+    <svg width="1200" height="300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="banner2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#fb9c34;stop-opacity:0.8" />
+        </linearGradient>
+      </defs>
+      <rect width="1200" height="300" fill="url(#banner2)"/>
+      <circle cx="100" cy="50" r="40" fill="rgba(255,255,255,0.2)"/>
+      <circle cx="1100" cy="250" r="60" fill="rgba(255,255,255,0.15)"/>
+      <rect x="50" y="120" width="300" height="80" fill="rgba(255,255,255,0.1)" rx="10"/>
+      <text x="600" y="160" font-size="48" font-weight="bold" text-anchor="middle" fill="white" opacity="0.9">Exotic Birds Hub</text>
+    </svg>
+  

@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(npm list *)",
+      "Bash(npx next *)",
+      "Bash(node *)",
+      "Bash(curl -s http://localhost:3002/)",
+      "Bash(curl -s http://localhost:3002/pets/1)",
+      "Bash(netstat -ano)",
+      "Bash(taskkill *)",
+      "Bash(curl -s http://localhost:3000)"
+    ]
+  }
+}

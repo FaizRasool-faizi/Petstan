@@ -1,0 +1,14 @@
+
+    <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="seller3" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#ec4899;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#84fb35;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <rect width="200" height="200" fill="url(#seller3)"/>
+      <circle cx="100" cy="80" r="35" fill="rgba(255,255,255,0.3)"/>
+      <rect x="60" y="120" width="80" height="60" fill="rgba(255,255,255,0.2)" rx="5"/>
+      <text x="100" y="180" font-size="14" font-weight="bold" text-anchor="middle" fill="white" opacity="0.9">A</text>
+    </svg>
+  
