@@ -31,6 +31,8 @@ export default function SearchFilters({ onFilterChange }: SearchFiltersProps) {
     { value: 'rabbits', label: 'Rabbits', icon: '🐰' },
     { value: 'hamsters', label: 'Hamsters', icon: '🐹' },
     { value: 'reptiles', label: 'Reptiles', icon: '🦎' },
+    { value: 'goats', label: 'Goats', icon: '🐐' },
+    { value: 'horses', label: 'Horses', icon: '🐴' },
     { value: 'other', label: 'Other', icon: '🐾' },
   ];
 

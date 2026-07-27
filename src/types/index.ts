@@ -72,6 +72,8 @@ export type PetCategory =
   | 'rabbits'
   | 'hamsters'
   | 'reptiles'
+  | 'goats'
+  | 'horses'
   | 'feed'
   | 'other';
 

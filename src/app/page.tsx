@@ -13,6 +13,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Toaster } from 'react-hot-toast';
 import { FiClock, FiEye, FiTrendingUp } from 'react-icons/fi';
 import Image from 'next/image';
+import { playCategorySound } from '@/lib/soundEffects';
 
 // Mock Data
 const mockPets: Pet[] = [
@@ -273,12 +274,16 @@ export default function Home() {
               { id: 'cats', icon: '🐈', name: 'Cats', color: 'bg-purple-100 text-purple-600' },
               { id: 'birds', icon: '🦜', name: 'Birds', color: 'bg-sky-100 text-sky-600' },
               { id: 'fish', icon: '🐠', name: 'Fish', color: 'bg-blue-100 text-blue-600' },
+              { id: 'goats', icon: '🐐', name: 'Goats', color: 'bg-emerald-100 text-emerald-600' },
+              { id: 'horses', icon: '🐴', name: 'Horses', color: 'bg-amber-100 text-amber-600' },
+              { id: 'reptiles', icon: '🦎', name: 'Reptiles', color: 'bg-teal-100 text-teal-600' },
               { id: 'feed', icon: '🦴', name: 'Accessories', color: 'bg-rose-100 text-rose-600' },
             ].map(cat => (
               <motion.button
                 key={cat.id}
                 whileHover={{ scale: 1.1, y: -5 }}
                 whileTap={{ scale: 0.95 }}
+                onMouseEnter={() => playCategorySound(cat.id)}
                 onClick={() => handleFilterChange({ category: cat.id as any })}
                 className="flex flex-col items-center gap-3 snap-center cursor-pointer group"
               >
