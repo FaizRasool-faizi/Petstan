@@ -212,10 +212,21 @@ const mockSellers: Seller[] = [
 ];
 
 export default function Home() {
+  const [activeFilters, setActiveFilters] = useState<SearchFiltersType>({ sortBy: 'newest' });
   const [filteredPets, setFilteredPets] = useState<Pet[]>(mockPets);
 
   const handleFilterChange = (filters: SearchFiltersType) => {
+    setActiveFilters(filters);
     let filtered = [...mockPets];
+
+    if (filters.searchQuery) {
+      const q = filters.searchQuery.toLowerCase();
+      filtered = filtered.filter(pet => 
+        pet.name.toLowerCase().includes(q) || 
+        pet.breed.toLowerCase().includes(q) ||
+        pet.description.toLowerCase().includes(q)
+      );
+    }
 
     if (filters.category) {
       filtered = filtered.filter((pet) => pet.category === filters.category);
@@ -285,20 +296,20 @@ export default function Home() {
                 whileHover={{ scale: 1.1, y: -5 }}
                 whileTap={{ scale: 0.95 }}
                 onMouseEnter={() => playCategorySound(cat.id)}
-                onClick={() => handleFilterChange({ category: cat.id as any })}
+                onClick={() => handleFilterChange({ ...activeFilters, category: activeFilters.category === cat.id ? undefined : cat.id as any })}
                 className="flex flex-col items-center gap-3 snap-center cursor-pointer group"
               >
-                <div className={`w-20 h-20 rounded-full ${cat.color} flex items-center justify-center text-4xl shadow-md group-hover:shadow-lg transition-all border-4 border-white`}>
+                <div className={`w-20 h-20 rounded-full ${cat.color} flex items-center justify-center text-4xl shadow-md group-hover:shadow-lg transition-all border-4 border-white ${activeFilters.category === cat.id ? 'ring-4 ring-primary-500 ring-offset-2' : ''}`}>
                   {cat.icon}
                 </div>
-                <span className="font-extrabold text-sm text-neutral-700">{cat.name}</span>
+                <span className={`font-extrabold text-sm ${activeFilters.category === cat.id ? 'text-primary-600' : 'text-neutral-700'}`}>{cat.name}</span>
               </motion.button>
             ))}
           </div>
         </div>
       </section>
 
-      <SearchFilters onFilterChange={handleFilterChange} />
+      <SearchFilters activeFilters={activeFilters} onFilterChange={handleFilterChange} />
 
       {/* Flash Deals / Urgency hook */}
       <section className="py-12 bg-gradient-to-r from-rose-500 to-primary-600 text-white relative overflow-hidden">

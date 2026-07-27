@@ -179,4 +179,5 @@ export interface SearchFilters {
   trained?: boolean;
   city?: string;
   sortBy?: 'newest' | 'price-low' | 'price-high' | 'popular';
+  searchQuery?: string;
 }

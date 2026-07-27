@@ -6,32 +6,19 @@ import { FiSearch, FiFilter, FiX } from 'react-icons/fi';
 import { SearchFilters as SearchFiltersType, PetCategory } from '@/types';
 
 interface SearchFiltersProps {
+  activeFilters: SearchFiltersType;
   onFilterChange: (filters: SearchFiltersType) => void;
 }
 
-export default function SearchFilters({ onFilterChange }: SearchFiltersProps) {
+export default function SearchFilters({ activeFilters, onFilterChange }: SearchFiltersProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [filters, setFilters] = useState<SearchFiltersType>({
-    category: undefined,
-    minPrice: undefined,
-    maxPrice: undefined,
-    gender: undefined,
-    vaccinated: undefined,
-    trained: undefined,
-    sortBy: 'newest',
-  });
-  const [searchQuery, setSearchQuery] = useState('');
-
-
 
   const handleFilterChange = (key: keyof SearchFiltersType, value: any) => {
-    const newFilters = { ...filters, [key]: value };
-    setFilters(newFilters);
-    onFilterChange(newFilters);
+    onFilterChange({ ...activeFilters, [key]: value });
   };
 
   const clearFilters = () => {
-    const clearedFilters: SearchFiltersType = {
+    onFilterChange({
       category: undefined,
       minPrice: undefined,
       maxPrice: undefined,
@@ -39,10 +26,8 @@ export default function SearchFilters({ onFilterChange }: SearchFiltersProps) {
       vaccinated: undefined,
       trained: undefined,
       sortBy: 'newest',
-    };
-    setFilters(clearedFilters);
-    setSearchQuery('');
-    onFilterChange(clearedFilters);
+      searchQuery: ''
+    });
   };
 
   return (
@@ -55,8 +40,8 @@ export default function SearchFilters({ onFilterChange }: SearchFiltersProps) {
             <input
               type="text"
               placeholder="Search for pets by name, breed..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              value={activeFilters.searchQuery || ''}
+              onChange={(e) => handleFilterChange('searchQuery', e.target.value)}
               className="w-full pl-12 pr-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
             />
           </div>
@@ -86,7 +71,7 @@ export default function SearchFilters({ onFilterChange }: SearchFiltersProps) {
               <div className="flex justify-between items-center mb-2">
                 <label className="block text-sm font-bold text-neutral-700">Max Price</label>
                 <span className="text-primary-600 font-extrabold text-sm">
-                  Rs {filters.maxPrice ? filters.maxPrice.toLocaleString() : 'Any'}
+                  Rs {activeFilters.maxPrice ? activeFilters.maxPrice.toLocaleString() : 'Any'}
                 </span>
               </div>
               <input
@@ -94,7 +79,7 @@ export default function SearchFilters({ onFilterChange }: SearchFiltersProps) {
                 min="1000"
                 max="200000"
                 step="1000"
-                value={filters.maxPrice || 200000}
+                value={activeFilters.maxPrice || 200000}
                 onChange={(e) => handleFilterChange('maxPrice', Number(e.target.value))}
                 className="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer accent-primary-600 mb-2"
               />
@@ -117,7 +102,7 @@ export default function SearchFilters({ onFilterChange }: SearchFiltersProps) {
                     key={g.id || 'all'}
                     onClick={() => handleFilterChange('gender', g.id)}
                     className={`flex-1 py-2 text-sm font-bold rounded-lg border transition-all ${
-                      filters.gender === g.id
+                      activeFilters.gender === g.id
                         ? 'bg-primary-50 border-primary-500 text-primary-700'
                         : 'bg-white border-neutral-200 text-neutral-600 hover:border-primary-300'
                     }`}
@@ -143,7 +128,7 @@ export default function SearchFilters({ onFilterChange }: SearchFiltersProps) {
                     key={v.id === undefined ? 'all' : v.id.toString()}
                     onClick={() => handleFilterChange('vaccinated', v.id)}
                     className={`flex-1 py-2 text-sm font-bold rounded-lg border transition-all ${
-                      filters.vaccinated === v.id
+                      activeFilters.vaccinated === v.id
                         ? 'bg-green-50 border-green-500 text-green-700'
                         : 'bg-white border-neutral-200 text-neutral-600 hover:border-green-300'
                     }`}
@@ -158,7 +143,7 @@ export default function SearchFilters({ onFilterChange }: SearchFiltersProps) {
             <div>
               <label className="block text-sm font-bold text-neutral-700 mb-2">Sort By</label>
               <select
-                value={filters.sortBy || 'newest'}
+                value={activeFilters.sortBy || 'newest'}
                 onChange={(e) => handleFilterChange('sortBy', e.target.value)}
                 className="w-full px-3 py-2 border border-neutral-200 bg-neutral-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 font-medium text-neutral-700"
               >
@@ -172,7 +157,7 @@ export default function SearchFilters({ onFilterChange }: SearchFiltersProps) {
         )}
 
         {/* Clear Filters */}
-        {(filters.category || filters.minPrice || filters.maxPrice || filters.gender || searchQuery) && (
+        {(activeFilters.category || activeFilters.minPrice || activeFilters.maxPrice || activeFilters.gender || activeFilters.searchQuery) && (
           <motion.button
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
