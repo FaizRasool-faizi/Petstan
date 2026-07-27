@@ -54,12 +54,11 @@ export default function FlashSaleTimer() {
         <AnimatePresence mode="popLayout">
           <motion.span
             key={value}
-            initial={{ rotateX: 90, y: -20, opacity: 0 }}
-            animate={{ rotateX: 0, y: 0, opacity: 1 }}
-            exit={{ rotateX: -90, y: 20, opacity: 0 }}
-            transition={{ duration: 0.6, type: 'spring', bounce: 0.4 }}
+            initial={{ y: 30, opacity: 0, scale: 0.8 }}
+            animate={{ y: 0, opacity: 1, scale: 1 }}
+            exit={{ y: -30, opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.5, type: 'spring', bounce: 0.3 }}
             className="block text-4xl sm:text-5xl font-black absolute drop-shadow-md text-white"
-            style={{ transformOrigin: 'bottom', transformStyle: 'preserve-3d' }}
           >
             {pad(value)}
           </motion.span>
