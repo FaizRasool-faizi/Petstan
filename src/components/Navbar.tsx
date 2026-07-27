@@ -125,7 +125,7 @@ export default function Navbar() {
 
             {/* User Menu */}
             {isAuthenticated ? (
-              <div className="flex items-center gap-3">
+              <div className="hidden lg:flex items-center gap-3">
                 {user?.role === 'buyer' && (
                   <Link href="/orders" className="text-sm font-semibold text-neutral-700 hover:text-primary-600 hidden md:block mr-2">
                     {locale === 'en' ? 'My Orders' : 'میرے آرڈرز'}
@@ -158,7 +158,7 @@ export default function Navbar() {
                 </motion.button>
               </div>
             ) : (
-              <div className="flex items-center gap-2">
+              <div className="hidden lg:flex items-center gap-2">
                 <Link href="/login">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
