@@ -8,6 +8,7 @@ import PetCard from '@/components/PetCard';
 import TopSellers from '@/components/TopSellers';
 import Footer from '@/components/Footer';
 import PetStories from '@/components/PetStories';
+import FlashSaleTimer from '@/components/FlashSaleTimer';
 import { Pet, Seller, SearchFilters as SearchFiltersType } from '@/types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Toaster } from 'react-hot-toast';
@@ -310,20 +311,7 @@ export default function Home() {
              </h2>
              <p className="text-white/90 font-medium text-lg max-w-xl">Adopt your new best friend today and get up to 50% off adoption fees and free premium accessories!</p>
            </div>
-           <div className="flex gap-4">
-              <div className="bg-white/20 backdrop-blur-md rounded-2xl p-4 text-center min-w-[80px] border border-white/30 shadow-xl">
-                 <span className="block text-4xl font-black">05</span>
-                 <span className="text-xs font-bold uppercase tracking-widest opacity-80 mt-1 block">Hours</span>
-              </div>
-              <div className="bg-white/20 backdrop-blur-md rounded-2xl p-4 text-center min-w-[80px] border border-white/30 shadow-xl">
-                 <span className="block text-4xl font-black">45</span>
-                 <span className="text-xs font-bold uppercase tracking-widest opacity-80 mt-1 block">Mins</span>
-              </div>
-              <div className="bg-white/20 backdrop-blur-md rounded-2xl p-4 text-center min-w-[80px] border border-white/30 shadow-xl">
-                 <span className="block text-4xl font-black">12</span>
-                 <span className="text-xs font-bold uppercase tracking-widest opacity-80 mt-1 block">Secs</span>
-              </div>
-           </div>
+           <FlashSaleTimer />
         </div>
       </section>
 
