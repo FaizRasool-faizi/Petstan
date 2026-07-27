@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiSearch, FiFilter, FiX } from 'react-icons/fi';
 import { SearchFilters as SearchFiltersType, PetCategory } from '@/types';
-import { playCategorySound } from '@/lib/soundEffects';
 
 interface SearchFiltersProps {
   onFilterChange: (filters: SearchFiltersType) => void;
@@ -23,18 +22,7 @@ export default function SearchFilters({ onFilterChange }: SearchFiltersProps) {
   });
   const [searchQuery, setSearchQuery] = useState('');
 
-  const categories: { value: PetCategory; label: string; icon: string }[] = [
-    { value: 'dogs', label: 'Dogs', icon: '🐕' },
-    { value: 'cats', label: 'Cats', icon: '🐈' },
-    { value: 'birds', label: 'Birds', icon: '🦜' },
-    { value: 'fish', label: 'Fish', icon: '🐠' },
-    { value: 'rabbits', label: 'Rabbits', icon: '🐰' },
-    { value: 'hamsters', label: 'Hamsters', icon: '🐹' },
-    { value: 'reptiles', label: 'Reptiles', icon: '🦎' },
-    { value: 'goats', label: 'Goats', icon: '🐐' },
-    { value: 'horses', label: 'Horses', icon: '🐴' },
-    { value: 'other', label: 'Other', icon: '🐾' },
-  ];
+
 
   const handleFilterChange = (key: keyof SearchFiltersType, value: any) => {
     const newFilters = { ...filters, [key]: value };
@@ -83,31 +71,7 @@ export default function SearchFilters({ onFilterChange }: SearchFiltersProps) {
           </motion.button>
         </div>
 
-        {/* Category Pills */}
-        <div className="flex flex-wrap gap-3 mb-4">
-          {categories.map((category) => (
-            <motion.button
-              key={category.value}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onMouseEnter={() => playCategorySound(category.value)}
-              onClick={() =>
-                handleFilterChange(
-                  'category',
-                  filters.category === category.value ? undefined : category.value
-                )
-              }
-              className={`flex items-center gap-2 px-4 py-2 rounded-full border-2 transition-all ${
-                filters.category === category.value
-                  ? 'bg-primary-600 border-primary-600 text-white'
-                  : 'bg-white border-neutral-300 text-neutral-700 hover:border-primary-400'
-              }`}
-            >
-              <span>{category.icon}</span>
-              <span className="font-medium">{category.label}</span>
-            </motion.button>
-          ))}
-        </div>
+
 
         {/* Advanced Filters */}
         {isOpen && (
