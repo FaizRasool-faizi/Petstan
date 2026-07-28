@@ -142,8 +142,8 @@ export default function AboutPage() {
   ];
 
   const stats = [
-    { number: '500+', label: 'Active Sellers' },
-    { number: '5000+', label: 'Pets Listed' },
+    { number: '100+', label: 'Active Sellers' },
+    { number: '500+', label: 'Pets Listed' },
     { number: '10K+', label: 'Happy Customers' },
     { number: '50K+', label: 'Monthly Visitors' },
   ];
@@ -286,7 +286,7 @@ export default function AboutPage() {
               className="relative h-96 rounded-2xl overflow-hidden shadow-2xl"
             >
               <Image
-                src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=600&h=600&fit=crop"
+                src="/pets/golden-retriever.png"
                 alt="Happy pets"
                 fill
                 className="object-cover"

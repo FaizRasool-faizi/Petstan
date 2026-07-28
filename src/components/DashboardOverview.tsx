@@ -24,6 +24,7 @@ import {
   Pie,
   Cell,
 } from 'recharts';
+import { formatPKR } from '@/utils/format';
 
 interface DashboardOverviewProps {
   stats: {
@@ -54,7 +55,7 @@ export default function DashboardOverview({
   const statCards = [
     {
       title: 'Total Revenue',
-      value: `Rs ${stats.totalRevenue.toLocaleString()}`,
+      value: formatPKR(stats.totalRevenue),
       icon: FiDollarSign,
       color: 'bg-gradient-to-br from-green-500 to-green-700',
       change: '+12.5%',

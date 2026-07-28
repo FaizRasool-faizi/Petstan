@@ -263,7 +263,7 @@ export default function AllPetsPage() {
           {/* Right Grid: Pet Ads */}
           <div className="lg:col-span-3 space-y-8">
             {/* Top filters banner */}
-            <SearchFilters onFilterChange={handleFilterChange} />
+            <SearchFilters activeFilters={activeFilters} onFilterChange={handleFilterChange} />
 
             {/* Pets Grid */}
             {displayedPets.length > 0 ? (

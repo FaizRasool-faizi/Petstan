@@ -130,7 +130,7 @@ export default function PetCard({ pet, index = 0 }: PetCardProps) {
               )}
               <Link href={`/sellers/${pet.sellerId}`} className="flex items-center gap-1 text-neutral-700 font-bold hover:text-primary-600 hover:underline">
                 {pet.sellerName}
-                <FiCheckCircle className="w-4 h-4 text-primary-500" title="Verified Seller" />
+                <FiCheckCircle className="w-4 h-4 text-primary-500" title="Verified: CNIC & Shop Address Confirmed" />
               </Link>
             </div>
 
@@ -156,6 +156,12 @@ export default function PetCard({ pet, index = 0 }: PetCardProps) {
                 </span>
               </div>
             )}
+
+            {/* Buyer Protection */}
+            <div className="flex items-center gap-1 mt-1 text-[10px] font-bold text-green-700 bg-green-50/50 border border-green-200 px-2 py-1 rounded w-fit">
+              <FiShield className="w-3 h-3" />
+              <span title="Payment held until safe delivery">Buyer Protection</span>
+            </div>
 
             {/* Rating */}
             <div className="flex items-center gap-1">

@@ -8,21 +8,21 @@ import { getTranslation } from '@/utils/translations';
 import { FiArrowRight, FiShoppingBag, FiUsers } from 'react-icons/fi';
 
 const row1Images = [
-  'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=300&h=200&fit=crop',
-  'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=300&h=200&fit=crop',
-  'https://images.unsplash.com/photo-1444464666175-1642a9f33e12?w=300&h=200&fit=crop',
-  'https://images.unsplash.com/photo-1507146426996-ef05306b995a?w=300&h=200&fit=crop',
-  'https://images.unsplash.com/photo-1535268647977-a403b69fc756?w=300&h=200&fit=crop',
-  'https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=300&h=200&fit=crop',
+  '/pets/golden-retriever.png',
+  '/pets/persian-cat.png',
+  '/pets/african-grey.png',
+  '/pets/german-shepherd.png',
+  '/pets/siamese-kitten.png',
+  '/pets/betta-fish.png',
 ];
 
 const row2Images = [
-  'https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=300&h=200&fit=crop',
-  'https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0?w=300&h=200&fit=crop',
-  'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=300&h=200&fit=crop',
-  'https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=300&h=200&fit=crop',
-  'https://images.unsplash.com/photo-1568572933382-74d440642117?w=300&h=200&fit=crop',
-  'https://images.unsplash.com/photo-1513360371669-4a0eb3a4b3e9?w=300&h=200&fit=crop',
+  '/pets/betta-fish.png',
+  '/pets/siamese-kitten.png',
+  '/pets/german-shepherd.png',
+  '/pets/african-grey.png',
+  '/pets/persian-cat.png',
+  '/pets/golden-retriever.png',
 ];
 
 export default function HeroSection() {
@@ -51,9 +51,9 @@ export default function HeroSection() {
   };
 
   return (
-    <section dir={isRtl ? 'rtl' : 'ltr'} className="relative w-full overflow-hidden bg-neutral-950 flex items-center justify-center pt-24 pb-12">
+    <section dir={isRtl ? 'rtl' : 'ltr'} className="relative w-full overflow-hidden bg-primary-900 flex items-center justify-center pt-24 pb-12">
       {/* Auto-scrolling Background Image Marquees */}
-      <div className="absolute inset-0 z-0 flex flex-col justify-center space-y-4 opacity-30 select-none pointer-events-none scale-105">
+      <div className="absolute inset-0 z-0 flex flex-col justify-center space-y-4 opacity-40 select-none pointer-events-none scale-105">
         {/* Row 1 - Left to Right */}
         <div className="w-[200%] flex overflow-hidden whitespace-nowrap">
           <motion.div
@@ -86,8 +86,9 @@ export default function HeroSection() {
       </div>
 
       {/* Modern Gradient Overlays for High Text Contrast */}
-      <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/85 to-neutral-950 z-0" />
-      <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/50 via-transparent to-neutral-950/50 z-0" />
+      <div className="absolute inset-0 bg-gradient-to-t from-primary-900 via-primary-900/70 to-primary-900 z-0" />
+      <div className="absolute inset-0 bg-gradient-to-r from-primary-800/50 via-transparent to-primary-800/50 z-0" />
+      <div className="absolute inset-0 bg-primary-900/20 z-0" />
 
       {/* Content Container */}
       <div className="relative z-10 w-full container-custom text-center">
@@ -157,7 +158,7 @@ export default function HeroSection() {
           >
             <div className="text-center">
               <p className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
-                {sellers.filter(s => s.id !== 's_admin').length}+
+                100+
               </p>
               <p className="text-xs sm:text-sm text-neutral-400 mt-2 font-bold uppercase tracking-wide">
                 {getTranslation('heroStatSellers', locale)}
@@ -165,7 +166,7 @@ export default function HeroSection() {
             </div>
             <div className="text-center">
               <p className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
-                {pets.length}+
+                500+
               </p>
               <p className="text-xs sm:text-sm text-neutral-400 mt-2 font-bold uppercase tracking-wide">
                 {getTranslation('heroStatPets', locale)}

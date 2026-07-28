@@ -44,10 +44,10 @@ export default function Footer() {
   ];
 
   return (
-    <footer dir={isRtl ? 'rtl' : 'ltr'} className="bg-neutral-950 text-neutral-100 border-t border-neutral-900">
+    <footer dir={isRtl ? 'rtl' : 'ltr'} className="bg-primary-900 text-neutral-100 border-t border-primary-800">
       {/* Main Footer */}
-      <div className="container-custom py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+      <div className="container-custom py-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
           {/* Brand Section */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center space-x-2">
@@ -101,41 +101,8 @@ export default function Footer() {
             </div>
           ))}
 
-          {/* Official Branding Box */}
-          <div className="space-y-4 bg-neutral-900/50 p-6 rounded-xl border border-neutral-900">
-            <h4 className="text-lg font-bold text-white relative pb-2">
-              {locale === 'en' ? 'Petstan Feed Brand' : 'پٹس ٹان خوراک برانڈ'}
-              <span className={`absolute bottom-0 w-8 h-0.5 bg-secondary-500 transition-all ${isRtl ? 'right-0' : 'left-0'}`} />
-            </h4>
-            <p className="text-neutral-400 text-xs leading-relaxed">
-              {locale === 'en'
-                ? "Official Petstan Feed brand coming soon! Only admin is authorized to sell feed on this platform. High quality certified food for your companions."
-                : "پٹس ٹان آفیشل اینیمل فیڈ جلد متعارف کرایا جا رہا ہے! اس مارکیٹ پلیس پر فیڈ بیچنے کا اختیار صرف ایڈمن کے پاس ہے۔"}
-            </p>
-            <div className="flex items-center gap-3">
-              {socialLinks.map((social) => {
-                const Icon = social.icon;
-                return (
-                  <motion.a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="w-9 h-9 rounded-lg bg-neutral-850 hover:bg-primary-600 flex items-center justify-center transition-colors border border-neutral-800"
-                    aria-label={social.label}
-                  >
-                    <Icon className="w-4 h-4 text-white" />
-                  </motion.a>
-                );
-              })}
-            </div>
-          </div>
+          {/* Official Branding Box Removed to save space */}
         </div>
-
-        {/* Divider */}
-        <div className="border-t border-neutral-900 my-8" />
 
         {/* Bottom Footer */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -154,7 +121,7 @@ export default function Footer() {
               {['💵 COD', '🏦 Transfer'].map((txt, i) => (
                 <div
                   key={i}
-                  className="px-2.5 py-1 bg-neutral-900 border border-neutral-800 rounded text-xs font-bold text-neutral-300"
+                  className="px-2.5 py-1 bg-primary-800 border border-primary-700 rounded text-xs font-bold text-primary-100"
                 >
                   {txt}
                 </div>

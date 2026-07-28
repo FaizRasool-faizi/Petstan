@@ -9,6 +9,7 @@ import { FiStar, FiTrendingUp, FiShoppingBag, FiMapPin, FiClock } from 'react-ic
 import { Seller } from '@/types';
 import { useDataStore, useUIStore } from '@/lib/store';
 import { getTranslation } from '@/utils/translations';
+import { formatPKR } from '@/utils/format';
 import { motion } from 'framer-motion';
 
 export default function SellersDirectoryPage() {
@@ -185,7 +186,7 @@ export default function SellersDirectoryPage() {
                         </div>
                         <div>
                           <p className="text-lg font-extrabold text-primary-600 mb-0.5">
-                            Rs {(seller.totalRevenue / 1000).toFixed(0)}K
+                            {formatPKR(seller.totalRevenue)}
                           </p>
                           <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider">
                             {locale === 'en' ? 'Revenue' : 'آمدنی'}
@@ -193,7 +194,7 @@ export default function SellersDirectoryPage() {
                         </div>
                       </div>
                       <button className="w-full btn-primary py-2.5 text-sm font-bold mt-4 shadow-sm hover:shadow">
-                        {getTranslation('heroSellersBtn', locale)}
+                        {locale === 'en' ? 'Visit Store' : 'دکان دیکھیں'}
                       </button>
                     </div>
                   </motion.div>
